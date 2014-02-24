@@ -1,0 +1,23 @@
+/*CUSTOM CSS*/
+.navbar-inverse .navbar-inner {
+	background-image: linear-gradient(to bottom, #0271AF, #0970B4);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+	border-color: rgba(255, 255, 255, 1);
+	}
+
+.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+	color: #FFFFFF;
+	}
+.navbar-inverse .brand, .navbar-inverse .nav>li>a:hover{
+	color: silver;
+	}
+
+.navbar-inverse .nav li.dropdown.open>.dropdown-toggle, .navbar-inverse .nav li.dropdown.active>.dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active>.dropdown-toggle {
+	background-color: #0271AF;
+	color: #ffffff;
+	}
+.navbar-inverse .divider-vertical {
+	border-left-color: #ffffff;
+	border-right-color: #ffffff;
+	}

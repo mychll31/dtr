@@ -1,0 +1,124 @@
+<?php
+/* @var $this EmployeeScheduleController */
+/* @var $model EmployeeSchedule */
+/* @var $form CActiveForm */
+?>
+
+<div class="form">
+
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+	'id'=>'employee-schedule-form',
+	// Please note: When you enable ajax validation, make sure the corresponding
+	// controller action is handling ajax validation correctly.
+	// There is a call to performAjaxValidation() commented in generated controller code.
+	// See class documentation of CActiveForm for details on this.
+	'enableAjaxValidation'=>false,
+)); ?>
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	<?php echo $form->errorSummary($model); ?>
+
+	<!--div class="row">
+		<?php #echo $form->labelEx($model,'sched_id'); ?>
+		<?php #echo $form->textField($model,'sched_id'); ?>
+		<?php #echo $form->error($model,'sched_id'); ?>
+	</div-->
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'emp_id'); ?>
+		<?php echo $form->hiddenField($model,'emp_id'); ?>
+		<?php echo $form->error($model,'emp_id'); ?>
+
+		<?php
+		$employees = Employee::model()->findAll(); 
+		$emp = array(); 
+		foreach($employees as $emps){ 
+			array_push($emp, $emps['id'].". ".$emps['lastname']." ".$emps['firstname']); 
+		}
+		$this->widget(
+										'bootstrap.widgets.TbSelect2',
+										array(
+														'asDropDownList' => false,
+														'name' => 'emp_sel',
+														'options' => array(
+																		'tags' => $emp,
+																		'placeholder' => 'Type the name of employee and press enter to select',
+																		'width' => '100%',
+																		'tokenSeparators' => array(',', ' ')
+																		)
+												 )
+								 );
+		?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'Checkin'); ?>
+		<?php
+		$this->widget(
+									'bootstrap.widgets.TbTimePicker',
+									array(
+													'name' => 'checkin',
+													'options' => array(
+																	'showMeridian' => false
+																	)
+											 )
+							 );
+		?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'Checkout'); ?>
+		<?php
+		$this->widget(
+									'bootstrap.widgets.TbTimePicker',
+									array(
+													'name' => 'checkout',
+													'options' => array(
+																	'showMeridian' => false
+																	)
+											 )
+							 );
+		?>
+	</div>
+
+	<!--div class="row">
+		<?php #echo $form->labelEx($model,'week_id'); ?>
+		<?php #echo $form->textField($model,'week_id'); ?>
+		<?php #echo $form->error($model,'week_id'); ?>
+	</div-->
+
+	<div class="row">
+	<?php
+	echo $form->datepickerRow($model,'start_date',array(
+													'name'=>'startDate',
+													'value'=>date("Y-m-d"),
+													'options' => array(
+																	'language' => 'en',
+																	'autoclose'=>true,
+																	'format'=>'yyyy-mm-dd',            
+																	),                                                                                          
+													'prepend' => '<i class="icon-calendar"></i>'
+													));
+	echo $form->datepickerRow($model,'end_date',array(
+													'name'=>'endDate',
+													'value'=>date("Y-m-d"),
+													'options' => array(
+																	'language' => 'en',
+																	'autoclose'=>true,
+																	'format'=>'yyyy-mm-dd',            
+																	),                                                                                          
+													'prepend' => '<i class="icon-calendar"></i>'
+													));
+	?>
+
+
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->
